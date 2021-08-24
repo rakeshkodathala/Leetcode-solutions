@@ -1,0 +1,38 @@
+//code
+
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        
+        if(l1 == 0 || l2 == 0)
+            return l1;
+        
+        ListNode* node = new ListNode(0);
+        ListNode* temp = node;
+        
+        int c = 0;
+        while(l1 != NULL || l2 != NULL){
+            int l1_val = (l1 != NULL) ? l1->val : 0;
+            int l2_val = (l2 != NULL) ? l2->val : 0;
+            
+            int sum = l1_val + l2_val + c;
+            c = sum/10;
+            int last_digit = sum % 10;
+            
+            ListNode* new_node = new ListNode(last_digit);
+            temp->next = new_node;
+            
+            if(l1 != NULL) l1 = l1->next;
+            if(l2 != NULL) l2 = l2->next;
+            temp = temp->next;
+        }
+        
+        if(c > 0){
+            ListNode* place = new ListNode(c);
+            temp->next = place;
+            temp = temp->next;
+        }
+        
+        return node->next;
+    }
+};
