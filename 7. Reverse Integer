@@ -1,0 +1,21 @@
+###code
+
+class Solution {
+public:
+    int reverse(int x) {
+        
+        if(x == 0)
+            return 0;
+        
+        signed int s = 0;
+        while(x != 0){
+            int r = x%10;
+            x = x/10;
+            if (s > INT_MAX/10 || (s == INT_MAX / 10 && r > 7)) return 0;
+            if (s < INT_MIN/10 || (s == INT_MIN / 10 && r < -8)) return 0;
+            s = s*10 + r;
+        }
+        
+        return s;
+    }
+};
