@@ -1,0 +1,19 @@
+#code
+
+class Solution {
+public:
+    bool isBalanced(TreeNode* root) {
+        
+        if(root == NULL)
+            return true;
+        
+        int l = depth(root->left);
+        int r = depth(root->right);
+        
+        return abs(l-r) <= 1 && isBalanced(root->left) && isBalanced(root->right);
+    }
+    int depth(TreeNode* node){
+        if (node == NULL) return 0;
+        return max(depth(node->left),depth(node->right))+1;
+    }
+};
