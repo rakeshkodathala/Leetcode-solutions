@@ -1,0 +1,30 @@
+#code
+
+class Solution {
+public:
+    
+    TreeNode* sortedListToBST(ListNode* head) {
+        if(head == NULL) return NULL;
+        return constructBST(head,NULL);
+    }
+    
+    TreeNode* constructBST(ListNode* head,ListNode* tail){
+        if(head == tail)
+    		return NULL;
+    	if(head->next == tail){	
+    		TreeNode *root = new TreeNode( head->val );
+    		return root;
+    	}
+    	ListNode* mid = head;
+        ListNode* second = head;
+    	while(second!= tail && second->next != tail) {
+    		mid = mid->next;
+    		second = second->next->next;
+    	}
+        TreeNode* node = new TreeNode(mid->val);
+        node -> left = constructBST(head,mid);
+        node -> right = constructBST(mid->next,tail);
+        return node;
+    }
+   
+};
