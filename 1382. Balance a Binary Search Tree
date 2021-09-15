@@ -1,0 +1,29 @@
+#code
+
+class Solution {
+public:
+    vector<int> v;
+    TreeNode* balanceBST(TreeNode* root) {        
+        if(root == NULL) return NULL;
+        inorder(root);
+        int n = v.size();
+        return Bst(v,0,n-1); 
+    }
+    TreeNode* Bst(vector<int>& v,int l,int h){
+        if(l > h) return NULL;
+        int mid = l + (h-l) / 2;
+        TreeNode* node = new TreeNode(v[mid]);
+        node ->left = Bst(v,l,mid-1);
+        node ->right = Bst(v,mid+1,h);
+        
+        return node;
+    }
+    void inorder(TreeNode* root){
+        if(!root)
+            return;
+        
+        inorder(root->left);
+        v.push_back(root->val);
+        inorder(root->right);
+    }
+};
