@@ -1,0 +1,37 @@
+#code
+
+
+class Solution {
+public:
+    
+
+    int numIslands(vector<vector<char>>& grid) {
+        if(grid.empty()) return 0;
+        
+        int m=grid.size(), n=grid[0].size();
+        int c = 0;
+        
+        vector<vector<bool>> vis(m, vector<bool> (n, false));
+
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(grid[i][j] == '1' && !vis[i][j]){
+                    c++;
+                    bfs(i,j,grid,vis);
+                }
+            }
+        }
+        return c;
+    }
+    
+    void bfs(int i, int j, vector<vector<char>>& grid, vector<vector<bool>>& vis){
+        if(i<0 || i>=grid.size() || j<0 || j>=grid[0].size()) return;
+        if(vis[i][j] || grid[i][j] == '0') return;
+        
+        vis[i][j] = true;
+        bfs(i+1, j, grid, vis);
+        bfs(i, j+1, grid, vis);
+        bfs(i-1, j, grid, vis);
+        bfs(i, j-1, grid, vis);
+    }
+};
