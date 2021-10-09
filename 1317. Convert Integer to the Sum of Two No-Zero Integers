@@ -1,0 +1,25 @@
+#code
+
+class Solution {
+public:
+    
+    bool notzero(int n){
+        while(n){
+            if(n%10 == 0) return false;
+            n/=10;
+        }
+        return true;
+    }
+    vector<int> getNoZeroIntegers(int n) {
+        vector<int> res;
+        
+        for(int i=1;i<=n/2;i++){
+            if(notzero(i) && notzero(n-i)){
+                res.push_back(i);
+                res.push_back(n-i);
+                return res;
+            }
+        }
+        return res;
+    }
+};
