@@ -1,0 +1,25 @@
+class Solution {
+private:
+    unordered_map<int,int> mpp;
+    int maxi = 0;
+public:
+    vector<int> findFrequentTreeSum(TreeNode* root) {
+        vector<int> ans;
+        dfs(root);
+        for(auto i : mpp){
+            if(i.second == maxi)
+                ans.push_back(i.first);
+        }
+        return ans;
+    }
+    int dfs(TreeNode* node){
+        if(node == NULL)
+            return 0;
+        
+        int sum = dfs(node->left) + dfs(node->right) + node->val;
+            mpp[sum]++;
+        
+        maxi = max(maxi,mpp[sum]);
+     return sum;   
+    }
+};
