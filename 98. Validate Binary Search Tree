@@ -1,0 +1,15 @@
+class Solution {
+private:
+    bool isBST(TreeNode* root,long min,long max){
+        if(!root) return true;
+        if(root->val <= min || root->val >= max) return false;
+        return isBST(root->left,min,root->val) && isBST(root->right,root->val,max);
+    }    
+public:
+    bool isValidBST(TreeNode* root) {
+        
+        if(!root) return true;
+        
+        return isBST(root,LONG_MIN,LONG_MAX);
+    }
+};
