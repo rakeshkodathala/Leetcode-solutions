@@ -1,0 +1,32 @@
+#define pb push_back
+template <typename T> void chkMin(T &x, T y) { if (y < x) x = y; }
+
+class Solution {
+public:
+    int d[100005],t=0,c[100005],n;
+    vector<int> nodesBetweenCriticalPoints(ListNode* p) {
+        while(p != NULL){
+            d[++t] = p -> val;
+            p = p -> next;
+        }
+        for(int i=2;i<t;i++){
+            if(d[i] < d[i-1] && d[i] < d[i+1]) c[++n] = i;
+            else if(d[i] > d[i-1] && d[i] > d[i+1]) c[++n] = i; 
+        }
+        vector<int> res;
+        if(n < 2){
+            res.pb(-1);
+            res.pb(-1);
+            return res;
+        } 
+        else{
+            int mx = INT_MIN, mn = INT_MAX;
+            for (int i=1;i<n;i++){
+                chkMin(mn, c[i + 1] - c[i]);
+            }
+            mx = c[n] - c[1];
+            res.pb(mn), res.pb(mx);
+            return res;
+        }
+    }
+};
