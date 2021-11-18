@@ -1,0 +1,29 @@
+#code
+
+
+class Solution {
+public:
+    int longestConsecutive(vector<int>& a) {
+        
+        int n = a.size();
+        unordered_set<int> s;
+        for(int i=0;i<n;i++) s.insert(a[i]);
+        
+        int longeststreak = 0;
+        
+        for(auto num : s){
+            if(!s.count(num-1)){
+                int curnum = num;
+                int curstreak = 1;
+                
+                while(s.count(curnum+1)){
+                    curnum++;
+                    curstreak++;
+                }
+                longeststreak = max(longeststreak,curstreak);
+            }
+        }
+        
+        return longeststreak;
+    }
+};
